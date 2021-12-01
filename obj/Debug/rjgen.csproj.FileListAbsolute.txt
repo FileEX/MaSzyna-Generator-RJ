@@ -1,0 +1,9 @@
+C:\Users\wikajustyna\Documents\SharpDevelop Projects\rjgen\rjgen\obj\Debug\rjgen.csprojResolveAssemblyReference.cache
+C:\Users\wikajustyna\Documents\SharpDevelop Projects\rjgen\rjgen\obj\Debug\rjgen.MainForm.resources
+C:\Users\wikajustyna\Documents\SharpDevelop Projects\rjgen\rjgen\obj\Debug\rjgen.csproj.GenerateResource.Cache
+C:\Users\wikajustyna\Documents\SharpDevelop Projects\rjgen\rjgen\bin\Debug\rjgen.exe
+C:\Users\wikajustyna\Documents\SharpDevelop Projects\rjgen\rjgen\bin\Debug\rjgen.pdb
+C:\Users\wikajustyna\Documents\SharpDevelop Projects\rjgen\rjgen\obj\Debug\rjgen.exe
+C:\Users\wikajustyna\Documents\SharpDevelop Projects\rjgen\rjgen\obj\Debug\rjgen.pdb
+C:\Users\wikajustyna\Documents\SharpDevelop Projects\rjgen\rjgen\obj\Debug\rjgen.About.resources
+C:\Users\wikajustyna\Documents\SharpDevelop Projects\rjgen\rjgen\obj\Debug\rjgen.AddMenu.resources
