@@ -345,6 +345,104 @@ namespace rjgen
 			}
 		}
 		
+		void DataGridView1CellEndEdit(object sender, DataGridViewCellEventArgs e)
+		{
+			var val = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+			if (val == null || val.ToString() == "" || val.ToString() == String.Empty) {
+				if (e.ColumnIndex == 4 || e.ColumnIndex == 5)
+				{
+					dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "|";
+				} else if (e.ColumnIndex == 0) {
+					dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "???";
+				}
+			}
+		}
+		
+		void OtwórzToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			string path = "";
+			if (openFileDialog1.ShowDialog() == DialogResult.OK) {
+				path = openFileDialog1.FileName;
+			}
+			
+			if (File.Exists(path)) {
+				string[] readData = File.ReadAllLines(path);
+				
+				dataGridView1.Rows.Clear();
+				dataGridView1.ClearSelection();
+				
+				trainName.Text = "";
+				trainCategory.SelectedIndex = -1;
+				
+				string typeVal = Regex.Replace(Regex.Match(readData[1], @"(?<=\|)\s.+?(?=\])").ToString(), @"\s+?", "");
+				trainID.Text = typeVal;
+				
+				string secLVal = Regex.Replace(Regex.Match(readData[2], @"(?<=\|)\s.+?(?=\])").ToString(), @"\s+?", "");
+				
+				int nextLine = 3;
+				if (readData[2].Contains("Kategoria")) {
+					for (int i = 0; i < trainCategory.Items.Count; i++) {
+						if (trainCategory.GetItemText(trainCategory.Items[i]) == secLVal)
+						{
+							trainCategory.SelectedIndex = i;
+							break;
+						}
+					}
+					
+					nextLine = 4;
+					
+					if (readData[3].Contains("Nazwa poci")) {
+						trainName.Text = Regex.Replace(Regex.Match(readData[3], @"(?<=\|)\s.+?(?=\])").ToString(), @"\s+?", "");
+						nextLine = 5;
+					}
+				} else if (readData[2].Contains("Nazwa poci")) {
+					trainName.Text = secLVal;
+					nextLine = 4;
+				}
+				
+				string firstStationName = Regex.Replace(Regex.Match(readData[nextLine], @"(?<=\|)\s.+?(?=\])").ToString(), @"\s+?", "");
+				string lastStationName = Regex.Replace(Regex.Match(readData[nextLine+1], @"(?<=\|)\s.+?(?=\])").ToString(), @"\s+?", "");
+				
+				int brakeMassInt = nextLine+3;
+				brakeMass.Text = Regex.Replace(Regex.Match(readData[brakeMassInt], @"(?<=\|)\s.+?(?=\])").ToString(), @"\s+?", "");
+				
+				string data_type = Regex.Match(readData[brakeMassInt+2], @"(?<=\|)\s.+?(?=\])").ToString().Trim();
+				trainType.Text = Regex.Match(data_type, @"([A-Z 0-9]+[0-9]+)").ToString();
+				
+				int startTable = brakeMassInt+4;
+				
+				for (int i = startTable; i < readData.Count()-1; i++) {
+					if (readData[i] != null && !readData[i].Contains("----------------------------------"))
+					{
+						string name = Regex.Match(readData[i], @"(?<=^[^|]*\|[^|]*\|).*?(?=\b[21]\b)").ToString().Trim();
+						
+						if (name.Count() > 2 && !name.Contains(","))
+						{
+							string km = Regex.Match(readData[i], @"(?<=\[).+?(?=\|)").ToString().Trim();
+							string velocity = Regex.Match(readData[i], @"(?<=\|)[\s0-9]+?(?=\|)").ToString().Trim();
+							string track = Regex.Match(readData[i], @"(\s\s+\b[21]\b\s)").ToString().Trim();
+							string desc = Regex.Match(readData[i+1], @"(?<=^[^|]*\|[^|]*\|).*?(?=\b[21]\b)").ToString().Trim();
+							string h1 = Regex.Match(readData[i], @"(?<=\s\s+\d\s)[0-9]+\.[0-9]+([\.][0-9])?").ToString();
+							string h2 = Regex.Match(readData[i+1], @"(?<=\s\s+\d\s)[0-9]+\.[0-9]+([\.][0-9])?").ToString();
+							
+							var row = new string[] {name, km, velocity, desc, h1.Replace(".", ":"), h2.Replace(".", ":"), track};
+							dataGridView1.Rows.Add(row);
+						}
+					}
+				}
+				
+				int lastRow = dataGridView1.Rows.Count - 2;
+				if (dataGridView1.Rows[0].Cells["stationName"].Value.ToString() == firstStationName && dataGridView1.Rows[lastRow].Cells["stationName"].Value.ToString() == lastStationName)
+				{
+					autoStations.Checked = true;
+				} else {
+					firstStation.Text = firstStationName;
+					lastStation.Text = lastStationName;
+				}
+			}
+		}
+		
+		
 		/*void SceneryListSelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (sceneryList.SelectedIndex > -1 && sceneryList.SelectedIndex != lastIndex)
@@ -392,18 +490,5 @@ namespace rjgen
 				//lastIndex = sceneryList.SelectedIndex;
 			}
 		}*/
-		
-		void DataGridView1CellEndEdit(object sender, DataGridViewCellEventArgs e)
-		{
-			var val = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-			if (val == null || val.ToString() == "" || val.ToString() == String.Empty) {
-				if (e.ColumnIndex == 4 || e.ColumnIndex == 5)
-				{
-					dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "|";
-				} else if (e.ColumnIndex == 0) {
-					dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "???";
-				}
-			}
-		}
 	}
 }

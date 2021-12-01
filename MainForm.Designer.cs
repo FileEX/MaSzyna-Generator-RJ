@@ -77,6 +77,7 @@ namespace rjgen
 			this.label4 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			this.label11 = new System.Windows.Forms.Label();
+			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
@@ -125,14 +126,15 @@ namespace rjgen
 			// 
 			this.otwórzToolStripMenuItem.Name = "otwórzToolStripMenuItem";
 			this.otwórzToolStripMenuItem.ShortcutKeyDisplayString = "";
-			this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
+			this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
 			this.otwórzToolStripMenuItem.Text = "&Otwórz";
+			this.otwórzToolStripMenuItem.Click += new System.EventHandler(this.OtwórzToolStripMenuItemClick);
 			// 
 			// zapiszToolStripMenuItem
 			// 
 			this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
 			this.zapiszToolStripMenuItem.ShortcutKeyDisplayString = "";
-			this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
+			this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
 			this.zapiszToolStripMenuItem.Text = "Zapisz";
 			this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.ZapiszToolStripMenuItemClick);
 			// 
@@ -184,7 +186,6 @@ namespace rjgen
 			this.dataGridView1.Size = new System.Drawing.Size(706, 347);
 			this.dataGridView1.TabIndex = 0;
 			this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1CellEndEdit);
-			this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1CellValueChanged);
 			// 
 			// stationName
 			// 
@@ -427,6 +428,12 @@ namespace rjgen
 			this.label11.TabIndex = 30;
 			this.label11.Text = "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|";
 			// 
+			// openFileDialog1
+			// 
+			this.openFileDialog1.DefaultExt = "txt";
+			this.openFileDialog1.FileName = "openFileDialog1";
+			this.openFileDialog1.Filter = "Pliki tekstowe (*.txt)|*.txt|Wszystkie pliki (*.*)|*.*";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -472,6 +479,7 @@ namespace rjgen
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn tracksNumber;
 		private System.Windows.Forms.CheckBox autoStations;
 		private System.Windows.Forms.Label label13;
