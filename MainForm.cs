@@ -419,8 +419,8 @@ namespace rjgen
 							string velocity = Regex.Match(readData[i], @"(?<=\|)[\s0-9]+?(?=\|)").ToString().Trim();
 							string track = Regex.Match(readData[i], @"(\s\s+\b[21]\b\s)").ToString().Trim();
 							string desc = Regex.Match(readData[i+1], @"(?<=^[^|]*\|[^|]*\|).*?(?=\b[21]\b)").ToString().Trim();
-							string h1 = Regex.Match(readData[i], @"(?<=\s\s+\d\s)[0-9]+\.[0-9]+([\.][0-9])?").ToString();
-							string h2 = Regex.Match(readData[i+1], @"(?<=\s\s+\d\s)[0-9]+\.[0-9]+([\.][0-9])?").ToString();
+							string h1 = Regex.Match(readData[i], @"(?<=\b[21]\b).*?(?=\|)").ToString().Trim();
+							string h2 = Regex.Match(readData[i+1], @"(?<=\b[21]\b).*?(?=\|)").ToString().Trim();
 							
 							if (h1.Count() <= 0 || h1 == String.Empty)
 								h1 = "|";
