@@ -126,7 +126,7 @@ namespace rjgen
 			// 
 			this.otwórzToolStripMenuItem.Name = "otwórzToolStripMenuItem";
 			this.otwórzToolStripMenuItem.ShortcutKeyDisplayString = "";
-			this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+			this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
 			this.otwórzToolStripMenuItem.Text = "&Otwórz";
 			this.otwórzToolStripMenuItem.Click += new System.EventHandler(this.OtwórzToolStripMenuItemClick);
 			// 
@@ -134,7 +134,7 @@ namespace rjgen
 			// 
 			this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
 			this.zapiszToolStripMenuItem.ShortcutKeyDisplayString = "";
-			this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+			this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
 			this.zapiszToolStripMenuItem.Text = "Zapisz";
 			this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.ZapiszToolStripMenuItemClick);
 			// 
@@ -186,6 +186,7 @@ namespace rjgen
 			this.dataGridView1.Size = new System.Drawing.Size(706, 347);
 			this.dataGridView1.TabIndex = 0;
 			this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1CellEndEdit);
+			this.dataGridView1.Font = new System.Drawing.Font("Roboto Condensed", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			// 
 			// stationName
 			// 
