@@ -192,10 +192,8 @@ namespace rjgen
 										int timeDiff2 = timeWidth.Length - time2Text.Length;
 										
 										string minuteText = "";
-										string separator = "     ";
-										bool separatedLines = false;
 										
-										if (row.Index >= 1) { // obliczamy czas przejazdu oraz definiujemy separator
+										if (row.Index >= 1) { // obliczamy czas przejazdu
 											var hour2 = dataGridView1.Rows[row.Index-1].Cells["hour2"].Value;
 											var hour1 = row.Cells["hour1"].Value;
 							
@@ -229,12 +227,6 @@ namespace rjgen
 													}
 												}
 											}
-											
-											if (vmaxInt != lastVmax)
-											{
-												separator = "_____";
-												separatedLines = true;
-											}
 										} else {
 											minuteText = "";
 										}
@@ -245,9 +237,6 @@ namespace rjgen
 										}
 										
 										int minDiff = minWidth.Length - minuteText.Length;
-										
-										string vmaxFinalText = !separatedLines ? " " + vmaxText + String.Concat(Enumerable.Repeat(" ", vmaxDiff)) : separator;
-										string separatorText = !separatedLines ? separator : " " + vmaxText + String.Concat(Enumerable.Repeat(" ", vmaxDiff));
 										
 										trackNum = Convert.ToInt32(row.Cells["tracksNumber"].Value);
 										
