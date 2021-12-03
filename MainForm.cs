@@ -363,7 +363,7 @@ namespace rjgen
 			}
 			
 			if (File.Exists(path)) {
-				string[] readData = File.ReadAllLines(path, System.Text.Encoding.GetEncoding(65001));
+				string[] readData = File.ReadAllLines(path, System.Text.Encoding.GetEncoding("Windows-1252"));
 				
 				dataGridView1.Rows.Clear();
 				dataGridView1.ClearSelection();
