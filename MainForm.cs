@@ -400,8 +400,6 @@ namespace rjgen
 				string firstStationName = Regex.Replace(Regex.Match(readData[nextLine], @"(?<=\|)\s.+?(?=\])").ToString(), @"\s+?", "");
 				string lastStationName = Regex.Replace(Regex.Match(readData[nextLine+1], @"(?<=\|)\s.+?(?=\])").ToString(), @"\s+?", "");
 				
-				MessageBox.Show(lastStationName, "e");
-				
 				int brakeMassInt = nextLine+3;
 				brakeMass.Text = Regex.Replace(Regex.Match(readData[brakeMassInt], @"(?<=\|)\s.+?(?=\])").ToString(), @"\s+?", "");
 				
