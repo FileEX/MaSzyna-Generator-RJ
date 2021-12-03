@@ -151,6 +151,7 @@ namespace rjgen
 								
 								int trackNum = 0;
 								
+								int loop_i = 0;
 								foreach (DataGridViewRow row in dataGridView1.Rows)
 								{
 									var stationNameData = row.Cells["stationName"].Value;
@@ -250,12 +251,17 @@ namespace rjgen
 										
 										trackNum = Convert.ToInt32(row.Cells["tracksNumber"].Value);
 										
+										if (vmaxText.Count() > 0 && loop_i > 0)
+										{
+											content[content.Count-1] = content[content.Count-1].Remove(9,5).Insert(9, "_____");
+										}
+										
 										content.Add( // dodajemy stacje do rozkładu linia 1
-										            "[ " + kmText + String.Concat(Enumerable.Repeat(" ", kmDiff)) + "|" + vmaxFinalText + "| " + stationNameText + String.Concat(Enumerable.Repeat(" ", nameDiff-1)) + trackNum + " " + time1Text + String.Concat(Enumerable.Repeat(" ", timeDiff)) + "| " + minuteText + String.Concat(Enumerable.Repeat(" ", minDiff)) + "]"
+										            "[ " + kmText + String.Concat(Enumerable.Repeat(" ", kmDiff)) + "| " + vmaxText + String.Concat(Enumerable.Repeat(" ", vmaxDiff)) + "| " + stationNameText + String.Concat(Enumerable.Repeat(" ", nameDiff-1)) + trackNum + " " + time1Text + String.Concat(Enumerable.Repeat(" ", timeDiff)) + "| " + minuteText + String.Concat(Enumerable.Repeat(" ", minDiff)) + "]"
 										);
 										
 										content.Add( // linia 2
-											"[       |" + separatorText + "|                                  " + trackNum + " " + time2Text + String.Concat(Enumerable.Repeat(" ", timeDiff2)) + "|         ]"
+											"[       |     |                                  " + trackNum + " " + time2Text + String.Concat(Enumerable.Repeat(" ", timeDiff2)) + "|         ]"
 										);
 										
 										string channelText = "";
@@ -297,6 +303,8 @@ namespace rjgen
 												"[       |     |----------------------------------" + trackNum + "---------|---------]"
 											);
 										}
+										
+										loop_i++;
 									}
 								}
 								
@@ -366,7 +374,7 @@ namespace rjgen
 			}
 			
 			if (File.Exists(path)) {
-				string[] readData = File.ReadAllLines(path);
+				string[] readData = File.ReadAllLines(path, System.Text.Encoding.GetEncoding(65001));
 				
 				dataGridView1.Rows.Clear();
 				dataGridView1.ClearSelection();
@@ -407,7 +415,7 @@ namespace rjgen
 				brakeMass.Text = Regex.Replace(Regex.Match(readData[brakeMassInt], @"(?<=\|)\s.+?(?=\])").ToString(), @"\s+?", "");
 				
 				string data_type = Regex.Match(readData[brakeMassInt+2], @"(?<=\|)\s.+?(?=\])").ToString().Trim();
-				trainType.Text = Regex.Match(data_type, @"([A-Z 0-9]+[0-9]+)").ToString();
+				trainType.Text = Regex.Match(data_type, @"([A-Za-z 0-9]+[0-9]+)").ToString();
 				
 				int startTable = brakeMassInt+4;
 				
@@ -424,6 +432,12 @@ namespace rjgen
 							string desc = Regex.Match(readData[i+1], @"(?<=^[^|]*\|[^|]*\|).*?(?=\b[21]\b)").ToString().Trim();
 							string h1 = Regex.Match(readData[i], @"(?<=\s\s+\d\s)[0-9]+\.[0-9]+([\.][0-9])?").ToString();
 							string h2 = Regex.Match(readData[i+1], @"(?<=\s\s+\d\s)[0-9]+\.[0-9]+([\.][0-9])?").ToString();
+							
+							if (h1.Count() <= 0 || h1 == String.Empty)
+								h1 = "|";
+							
+							if (h2.Count() <= 0 || h2 == String.Empty)
+								h2 = "|";
 							
 							var row = new string[] {name, km, velocity, desc, h1.Replace(".", ":"), h2.Replace(".", ":"), track};
 							dataGridView1.Rows.Add(row);
